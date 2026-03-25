@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Loading… — Straw Motion</title>
+  <meta name="description" content="">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+  <link rel="canonical" href="">
+  <meta name="robots" content="max-image-preview:large">
+  <link href="https://framerusercontent.com/sites/icons/default-favicon-light.v1.png" rel="icon" media="(prefers-color-scheme: light)">
+  <link href="https://framerusercontent.com/sites/icons/default-favicon-dark.v1.png" rel="icon" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="https://framerusercontent.com/sites/icons/default-touch-icon.v3.png">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
+
+  <style data-framer-font-css="">
+    @font-face { font-family: "Inter Display"; src: url("/assets/fonts/inter-display-400.woff2"); font-display: swap; font-style: normal; font-weight: 400; unicode-range: U+0000-00FF }
+    @font-face { font-family: "Inter Display"; src: url("/assets/fonts/inter-display-700.woff2"); font-display: swap; font-style: normal; font-weight: 700; unicode-range: U+0000-00FF }
+    @font-face { font-family: "Inter Display"; src: url("/assets/fonts/inter-display-600.woff2"); font-display: swap; font-style: normal; font-weight: 600; unicode-range: U+0000-00FF }
+    @font-face { font-family: "Inter"; src: url("/assets/fonts/inter-400.woff2"); font-display: swap; font-style: normal; font-weight: 400; unicode-range: U+0000-00FF }
+    @font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; src: url(/assets/fonts/fragment-mono-400.woff2) format('woff2'); unicode-range: U+0000-00FF }
+  </style>
+  <link rel="stylesheet" href="/css/article.css">
+</head>
+<body>
+
+  <!-- Nav -->
+  <div class="sm-nav-wrap">
+    <div class="sm-nav">
+      <a class="sm-nav-logo" href="/" aria-label="Straw Motion">
+        <img src="/assets/icons/logo.svg" alt="Straw Motion" width="140" height="18">
+      </a>
+      <nav class="sm-nav-links">
+        <a href="/about">About</a>
+        <a href="/news">News</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="sm-nav-hamburger" aria-label="Menu">
+        <span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div class="sm-page" id="sm-page">
+    <p class="sm-loading">Loading article…</p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="sm-footer">
+    <div class="sm-footer-inner">
+      <div class="sm-footer-brand">Straw Motion</div>
+      <div class="sm-footer-copy">Synthetic media lab for viral reach</div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuUMKLObhwh311DinBmJYenU5cZiowOABzYF6xDX4datFms-6RTgQZ-LvZnctcYoZdA7Lvc3eJlM_k/pub?output=csv';
+
+    function esc(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function plainToHtml(text) {
+      // Always treat body as plain text — escape then wrap in paragraphs
+      return text.split(/\n\n+/).map(function (para) {
+        return '<p>' + esc(para).replace(/\n/g, '<br>') + '</p>';
+      }).join('');
+    }
+
+    function parseCSV(text) {
+      var lines = text.trim().replace(/\r/g, '').split('\n');
+      var headers = lines[0].split(',').map(function (h) { return h.trim().replace(/^"|"$/g, ''); });
+      return lines.slice(1).filter(Boolean).map(function (line) {
+        var values = [];
+        var inQuote = false;
+        var current = '';
+        for (var i = 0; i < line.length; i++) {
+          var ch = line[i];
+          if (ch === '"') { inQuote = !inQuote; }
+          else if (ch === ',' && !inQuote) { values.push(current); current = ''; }
+          else { current += ch; }
+        }
+        values.push(current);
+        var obj = {};
+        headers.forEach(function (h, i) { obj[h] = (values[i] || '').replace(/^"|"$/g, '').trim(); });
+        return obj;
+      });
+    }
+
+    function setMeta(sel, val) {
+      var el = document.querySelector(sel);
+      if (el) el.setAttribute('content', val);
+    }
+
+    function formatDate(str) {
+      if (!str) return '';
+      var d = new Date(str);
+      return isNaN(d) ? str : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function render(post) {
+      var canonical = 'https://strawmotion.com/news/article?slug=' + encodeURIComponent(post.slug);
+
+      // Head meta
+      document.title = post.title + ' \u2014 Straw Motion';
+      setMeta('meta[name="description"]', post.excerpt || '');
+      setMeta('meta[property="og:title"]', post.title);
+      setMeta('meta[property="og:description"]', post.excerpt || '');
+      setMeta('meta[property="og:image"]', post.cover_image || '');
+      setMeta('meta[name="twitter:title"]', post.title);
+      setMeta('meta[name="twitter:description"]', post.excerpt || '');
+      setMeta('meta[name="twitter:image"]', post.cover_image || '');
+      var canonEl = document.querySelector('link[rel="canonical"]');
+      if (canonEl) canonEl.href = canonical;
+
+      // JSON-LD
+      var ld = {
+        '@context': 'https://schema.org',
+        '@type': 'NewsArticle',
+        headline: post.title,
+        description: post.excerpt || '',
+        url: canonical,
+        image: post.cover_image || '',
+        datePublished: post.date || '',
+        publisher: { '@type': 'Organization', name: 'Straw Motion', url: 'https://strawmotion.com' }
+      };
+      if (post.author) { ld.author = { '@type': 'Person', name: post.author }; }
+      var ldEl = document.createElement('script');
+      ldEl.type = 'application/ld+json';
+      ldEl.textContent = JSON.stringify(ld);
+      document.head.appendChild(ldEl);
+
+      var date = formatDate(post.date);
+
+      var authorAvatarHTML = post.author_image
+        ? '<img class="sm-author-avatar" src="' + esc(post.author_image) + '" alt="' + esc(post.author) + '">'
+        : '<div class="sm-author-avatar-placeholder"></div>';
+
+      var heroImageHTML = post.cover_image
+        ? '<div class="sm-hero-image-wrap"><img src="' + esc(post.cover_image) + '" alt="' + esc(post.title) + '"></div>'
+        : '';
+
+      document.getElementById('sm-page').innerHTML =
+        // ── Hero header ──
+        '<section class="sm-hero">' +
+          '<div class="sm-hero-pill">' +
+            '<span class="sm-pill-dot"></span>' +
+            esc(post.category || 'Article') +
+          '</div>' +
+          '<div class="sm-hero-titles">' +
+            '<h1 class="sm-hero-title">' + esc(post.title) + '</h1>' +
+            (post.excerpt ? '<p class="sm-hero-subtitle">' + esc(post.excerpt) + '</p>' : '') +
+          '</div>' +
+        '</section>' +
+
+        // ── Hero image ──
+        heroImageHTML +
+
+        // ── Content ──
+        '<div class="sm-content-outer">' +
+          '<div class="sm-content-inner">' +
+
+            // Author row
+            '<div class="sm-author-row">' +
+              authorAvatarHTML +
+              '<div class="sm-author-meta">' +
+                (post.author ? '<div class="sm-author-name">' + esc(post.author) + '</div>' : '') +
+                (date ? '<div class="sm-author-date">' + esc(date) + '</div>' : '') +
+              '</div>' +
+            '</div>' +
+
+            // Body — plain text, double line breaks become paragraphs
+            '<div class="sm-article-body">' + plainToHtml(post.body || '') + '</div>' +
+
+          '</div>' +
+        '</div>';
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var slug = params.get('slug');
+    var page = document.getElementById('sm-page');
+
+    if (!slug) {
+      page.innerHTML = '<p class="sm-error">No article specified. <a href="/news">Back to News</a></p>';
+      return;
+    }
+
+    fetch(SHEET_CSV_URL)
+      .then(function (r) { return r.text(); })
+      .then(function (text) {
+        var posts = parseCSV(text);
+        var post = posts.find(function (p) { return p.slug === slug; });
+        if (post) { render(post); }
+        else { page.innerHTML = '<p class="sm-error">Article not found. <a href="/news">Back to News</a></p>'; }
+      })
+      .catch(function () {
+        page.innerHTML = '<p class="sm-error">Could not load article. <a href="/news">Back to News</a></p>';
+      });
+  })();
+  </script>
+
+</body>
+</html>

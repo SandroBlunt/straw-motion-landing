@@ -1,0 +1,85 @@
+/* Hide static Framer post cards — replaced by CMS grid */
+a.framer-1oj6o9m { display: none !important; }
+
+#sm-cms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.sm-post-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.sm-post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+}
+
+.sm-post-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.sm-post-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sm-post-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  flex: 1;
+}
+
+.sm-post-cat {
+  font-size: .7rem;
+  font-family: "Fragment Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #49505d;
+}
+
+.sm-post-title {
+  font-size: 1.15rem;
+  font-family: "Inter Display", sans-serif;
+  font-weight: 600;
+  color: #1d2029;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.sm-post-excerpt {
+  font-size: .875rem;
+  font-family: "Inter", sans-serif;
+  color: #49505d;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.sm-post-date {
+  font-size: .75rem;
+  font-family: "Fragment Mono", monospace;
+  color: #5a6271;
+  margin-top: auto;
+  padding-top: .75rem;
+}
+
+.sm-status {
+  font-family: "Inter", sans-serif;
+  color: #49505d;
+  padding: 2rem 0;
+}
