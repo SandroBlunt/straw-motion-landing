@@ -162,7 +162,7 @@
     "publisher": { "@type": "Organization", "name": "Straw Motion", "url": "https://strawmotion.com" }
   }
   </script>
-</head>
+<style id="sm-overrides">#__framer-badge-container,.framer-q1uj3q,.framer-362lom-container{display:none!important}</style></head>
 <body data-tostatic="d92ffed07a3d548f88aedfa5c5343ddced12bd90.5014522de49a79dc376a63a417612b7fb5857227">
 	<script async="" src="https://events.framer.com/script?v=2" data-fid="78feb7e94c6f20ad047ebd2bcf4fd18efcc5017e62e45d29dc54b85964fd8b9e" data-no-nt=""></script>
 	<!-- Start of bodyStart -->
@@ -188,4 +188,4 @@
     <!-- End of bodyEnd -->
 
 
-<script>fetch("https://tostatic.app/fns/pixel/5014522de49a79dc376a63a417612b7fb5857227?origin="+encodeURIComponent(window.location.href), {headers: {'X-Site-Origin': window.location.href}});</script><script>(function(){function f(){document.querySelectorAll("a").forEach(function(a){if(a.textContent.trim()==="Journal"){a.textContent="News";}});}f();var o=new MutationObserver(f);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},5000);})();</script></body></html>
+<script>fetch("https://tostatic.app/fns/pixel/5014522de49a79dc376a63a417612b7fb5857227?origin="+encodeURIComponent(window.location.href), {headers: {'X-Site-Origin': window.location.href}});</script><script>(function(){function f(){document.querySelectorAll("a").forEach(function(a){if(a.textContent.trim()==="Journal"){a.textContent="News";}}); document.querySelectorAll("a[href*=\"journal\"]").forEach(function(a){a.href=a.href.replace(/journal/g,"news");});}f();var o=new MutationObserver(f);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},5000);})();</script></body></html>

@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/journal", "destination": "/news", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.html",
