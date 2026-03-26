@@ -188,4 +188,20 @@
     <!-- End of bodyEnd -->
 
 
-<script>fetch("https://tostatic.app/fns/pixel/5014522de49a79dc376a63a417612b7fb5857227?origin="+encodeURIComponent(window.location.href), {headers: {'X-Site-Origin': window.location.href}});</script><script>(function(){function f(){document.querySelectorAll("a").forEach(function(a){if(a.textContent.trim()==="Journal"){a.textContent="News";}});document.querySelectorAll('a[href*="journal"]').forEach(function(a){a.href=a.href.replace(/journal/g,"news");});document.querySelectorAll('a[href*="orchidstudio"]').forEach(function(a){a.href=a.href.replace(/orchidstudio\.com/g,"strawmotion.com");});var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);var n;while(n=w.nextNode()){var t=n.nodeValue;if(!t||!t.trim())continue;var u=t.replace(/Königsallee 27[,.]?\s*Düsseldorf[,.]?\s*Germany/gi,"Los Angeles — Málaga").replace(/orchidstudio\.com/gi,"strawmotion.com").replace(/\borchid\b/gi,"Straw Motion");if(u!==t)n.nodeValue=u;}}f();var o=new MutationObserver(f);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},5000);})();</script></body></html>
+<script>fetch("https://tostatic.app/fns/pixel/5014522de49a79dc376a63a417612b7fb5857227?origin="+encodeURIComponent(window.location.href), {headers: {'X-Site-Origin': window.location.href}});</script><script>(function(){function f(){
+document.querySelectorAll("a").forEach(function(a){if(a.textContent.trim()==="Journal"){a.textContent="News";}});
+document.querySelectorAll('a[href*="journal"]').forEach(function(a){a.href=a.href.replace(/journal/g,"news");});
+document.querySelectorAll('a[href*="orchidstudio"]').forEach(function(a){a.href=a.href.replace(/orchidstudio\.com/g,"strawmotion.com");});
+document.querySelectorAll('a[href*="behance.net"]').forEach(function(a){a.style.setProperty("display","none","important");});
+document.querySelectorAll('a[href*="instagram.com"]').forEach(function(a){a.href="https://www.instagram.com/strawmotion/";});
+document.querySelectorAll('img[alt*="rchid"]').forEach(function(img){img.alt=img.alt.replace(/orchid(\s+agency|\s+studio)?/gi,"Straw Motion");});
+var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false);
+var n;while(n=w.nextNode()){var t=n.nodeValue;if(!t||!t.trim())continue;
+var u=t
+  .replace(/Orchid Agency/gi,"Straw Motion")
+  .replace(/Orchid Studio/gi,"Straw Motion")
+  .replace(/K\u00f6nigsallee 27[,.]?\s*D\u00fcsseldorf[,.]?\s*Germany/gi,"Los Angeles \u2014 M\u00e1laga")
+  .replace(/orchidstudio\.com/gi,"strawmotion.com")
+  .replace(/\borchid\b/gi,"Straw Motion");
+if(u!==t)n.nodeValue=u;}}
+f();var o=new MutationObserver(f);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},5000);})()</script></body></html>
