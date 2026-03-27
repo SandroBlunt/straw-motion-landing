@@ -25,6 +25,7 @@ var mo=new MutationObserver(function(muts){for(var i=0;i<muts.length;i++){var m=
 if(document.documentElement)mo.observe(document.documentElement,{attributes:true,attributeFilter:['src','srcset','poster'],childList:true,subtree:true});
 sweep();setTimeout(sweep,500);setTimeout(sweep,1500);setTimeout(sweep,3000);setTimeout(sweep,5000);
 setTimeout(function(){mo.disconnect();},15000);
+document.addEventListener('click',function(e){var el=e.target;while(el&&el.tagName!=='A')el=el.parentElement;if(!el)return;var txt=el.textContent.trim();var href=el.getAttribute('href')||'';if(txt==='News'||txt==='Journal'||/journal/.test(href)){e.preventDefault();e.stopImmediatePropagation();window.location.href='/news';return;}if(txt==='Privacy policy'||txt==='Privacy Policy'||/privacy-policy/.test(href)){e.preventDefault();e.stopImmediatePropagation();window.location.href='/privacy-policy';return;}if(/terms of service/i.test(txt)||/terms/.test(href)){e.preventDefault();e.stopImmediatePropagation();window.location.href='/terms-of-services';return;}},true);
 })();
 </script>
 	

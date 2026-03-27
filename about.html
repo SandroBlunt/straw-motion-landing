@@ -25,6 +25,7 @@ var mo=new MutationObserver(function(muts){for(var i=0;i<muts.length;i++){var m=
 if(document.documentElement)mo.observe(document.documentElement,{attributes:true,attributeFilter:['src','srcset','poster'],childList:true,subtree:true});
 sweep();setTimeout(sweep,500);setTimeout(sweep,1500);setTimeout(sweep,3000);setTimeout(sweep,5000);
 setTimeout(function(){mo.disconnect();},15000);
+document.addEventListener('click',function(e){var el=e.target;while(el&&el.tagName!=='A')el=el.parentElement;if(!el)return;var txt=el.textContent.trim();var href=el.getAttribute('href')||'';if(txt==='News'||txt==='Journal'||/journal/.test(href)){e.preventDefault();e.stopImmediatePropagation();window.location.href='/news';return;}if(txt==='Privacy policy'||txt==='Privacy Policy'||/privacy-policy/.test(href)){e.preventDefault();e.stopImmediatePropagation();window.location.href='/privacy-policy';return;}if(/terms of service/i.test(txt)||/terms/.test(href)){e.preventDefault();e.stopImmediatePropagation();window.location.href='/terms-of-services';return;}},true);
 })();
 </script>
 	
@@ -227,5 +228,5 @@ var u=t
   .replace(/K\u00f6nigsallee 27[,.]?\s*D\u00fcsseldorf[,.]?\s*Germany/gi,"Los Angeles \u2014 M\u00e1laga")
   .replace(/orchidstudio\.com/gi,"strawmotion.com")
   .replace(/\borchid\b/gi,"Straw Motion");
-if(u!==t)n.nodeValue=u;}}
+if(u!==t)n.nodeValue=u;}document.querySelectorAll('h1').forEach(function(h){var fv=parseFloat(h.style.getPropertyValue('--framer-font-size'))||parseFloat(getComputedStyle(h).fontSize)||0;if(fv>80){h.style.setProperty('font-size','clamp(32px,4vw,48px)','important');h.style.setProperty('line-height','1.2','important');}});}
 f();setTimeout(f,500);setTimeout(f,1500);setTimeout(f,3000);var o=new MutationObserver(f);o.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","poster"]});setTimeout(function(){o.disconnect();},8000);})()</script></body></html>
